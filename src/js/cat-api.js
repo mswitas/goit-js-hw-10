@@ -21,7 +21,7 @@ export function fetchBreeds() {
         })
         .catch((error) => {
             console.log(error);
-           loadHandler('breeds', 'error');
+            loadHandler('breeds', 'error');
         });
 }
 
@@ -32,23 +32,21 @@ export function fetchCatByBreed(breedId) {
         .then((response) => {
             console.log(response);
             loadHandler('cat', 'loaded');
-            response.data.map((value) => {
-                const url = value.url;
-                const imgW = Number(value.width);
-                const imgH = Number(value.height);
-                let newH = resize(imgW, imgH, 400);
-                const catArr = value.breeds;
-                const catInfo = catArr[0];
-                const html = `
-                        <img src="${url}" width="400" height="${newH}">
-                        <div>
-                            <h2>${catInfo.name}</h2>
-                            <p>${catInfo.description}</p>
-                            <p><strong>Temperament: </strong>${catInfo.temperament}</p>
-                        </div>
-                    `;
+            const url = response.data[0].url;
+            const imgW = Number(response.data[0].width);
+            const imgH = Number(response.data[0].height);
+            let newH = resize(imgW, imgH, 400);
+            const catInfo = response.data[0].breeds[0];
+            const html = `
+                    <img src="${url}" width="400" height="${newH}">
+                    <div>
+                        <h2>${catInfo.name}</h2>
+                        <p>${catInfo.description}</p>
+                        <p><strong>Temperament: </strong>${catInfo.temperament}</p>
+                    </div>
+                `;
                 catInfoElement.innerHTML = html;
-            });
+           
             
         })
         .catch((error) => {
