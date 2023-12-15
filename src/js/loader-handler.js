@@ -1,3 +1,5 @@
+import { errorReport } from "./error-report";
+
 export function loadHandler(type, status) {
     const selectElement = document.querySelector('.select-wrapper');
     const loaderElement = document.querySelector('.loader');
@@ -12,7 +14,8 @@ export function loadHandler(type, status) {
                 break;
             case 'error':
                 loaderElement.classList.add('visually-hidden');
-                errorElement.classList.remove('visually-hidden');
+                // errorElement.classList.remove('visually-hidden');
+                errorReport();
                 break;
             default:
                 console.log('error - wrong status in loadHandler');
@@ -31,7 +34,8 @@ export function loadHandler(type, status) {
                 selectElement.classList.add('visually-hidden');
                 loaderElement.classList.add('visually-hidden');
                 catInfoElement.classList.add('visually-hidden');
-                errorElement.classList.remove('visually-hidden');
+                // errorElement.classList.remove('visually-hidden');
+                errorReport();
                 break;
             default:
                 console.log('error - wrong status in loadHandler');
